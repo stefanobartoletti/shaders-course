@@ -1,22 +1,22 @@
-import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Pane } from 'tweakpane'
+import './style.css'
 
 /**
  * Debug
  */
 const configs = {
-	example: 5,
+  example: 5,
 }
 const pane = new Pane()
 pane
-	.addBinding(configs, 'example', {
-		min: 0,
-		max: 10,
-		step: 0.1,
-	})
-	.on('change', (ev) => console.log(ev.value))
+  .addBinding(configs, 'example', {
+    min: 0,
+    max: 10,
+    step: 0.1,
+  })
+  .on('change', ev => console.log(ev.value))
 
 /**
  * Scene
@@ -35,8 +35,8 @@ scene.add(plane)
  * render sizes
  */
 const sizes = {
-	width: window.innerWidth,
-	height: window.innerHeight,
+  width: window.innerWidth,
+  height: window.innerHeight,
 }
 
 /**
@@ -57,8 +57,8 @@ const axesHelper = new THREE.AxesHelper(0.3)
  * renderer
  */
 const renderer = new THREE.WebGLRenderer({
-	antialias: window.devicePixelRatio < 2,
-	alpha: true,
+  antialias: window.devicePixelRatio < 2,
+  alpha: true,
 })
 document.body.appendChild(renderer.domElement)
 handleResize()
@@ -72,8 +72,8 @@ controls.enableDamping = true
 /**
  * Lights
  */
-const ambientLight = new THREE.AmbientLight(0xffffff, 1.5)
-const directionalLight = new THREE.DirectionalLight(0xffffff, 4.5)
+const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.5)
+const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 4.5)
 directionalLight.position.set(3, 10, 7)
 scene.add(ambientLight, directionalLight)
 
@@ -86,20 +86,20 @@ const clock = new THREE.Clock()
  * frame loop
  */
 function tic() {
-	/**
-	 * tempo trascorso dal frame precedente
-	 */
-	// const deltaTime = clock.getDelta()
-	/**
-	 * tempo totale trascorso dall'inizio
-	 */
-	const time = clock.getElapsedTime()
+  /**
+   * tempo trascorso dal frame precedente
+   */
+  // const deltaTime = clock.getDelta()
+  /**
+   * tempo totale trascorso dall'inizio
+   */
+  const time = clock.getElapsedTime()
 
-	controls.update()
+  controls.update()
 
-	renderer.render(scene, camera)
+  renderer.render(scene, camera)
 
-	requestAnimationFrame(tic)
+  requestAnimationFrame(tic)
 }
 
 requestAnimationFrame(tic)
@@ -107,14 +107,14 @@ requestAnimationFrame(tic)
 window.addEventListener('resize', handleResize)
 
 function handleResize() {
-	sizes.width = window.innerWidth
-	sizes.height = window.innerHeight
+  sizes.width = window.innerWidth
+  sizes.height = window.innerHeight
 
-	camera.aspect = sizes.width / sizes.height
-	camera.updateProjectionMatrix()
+  camera.aspect = sizes.width / sizes.height
+  camera.updateProjectionMatrix()
 
-	renderer.setSize(sizes.width, sizes.height)
+  renderer.setSize(sizes.width, sizes.height)
 
-	const pixelRatio = Math.min(window.devicePixelRatio, 2)
-	renderer.setPixelRatio(pixelRatio)
+  const pixelRatio = Math.min(window.devicePixelRatio, 2)
+  renderer.setPixelRatio(pixelRatio)
 }

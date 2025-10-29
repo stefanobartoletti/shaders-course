@@ -20,7 +20,7 @@ npm install
 ```
 PS. Devi aver installato Node.js e npm per poter eseguire questo comando.
 
-## Eseguire il progetto 
+## Eseguire il progetto
 
 Ora sei pronto per avviare il progetto lanciando il comando
 ```bash

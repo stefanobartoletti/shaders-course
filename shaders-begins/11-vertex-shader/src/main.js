@@ -31,9 +31,27 @@ const scene = new THREE.Scene()
 const material = new THREE.RawShaderMaterial({
   vertexShader,
   fragmentShader,
-
 })
-const geometry = new THREE.PlaneGeometry(1, 1, 1, 10, 10, 10)
+const geometry = new THREE.PlaneGeometry(1, 1)
+
+geometry.setAttribute(
+  'color',
+  new THREE.BufferAttribute(new Float32Array([
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+  ]), 3),
+)
+
 const plane = new THREE.Mesh(geometry, material)
 scene.add(plane)
 

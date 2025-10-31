@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Pane } from 'tweakpane'
+import fragmentShader from './shaders/basic/fragment.glsl'
+import vertexShader from './shaders/basic/vertex.glsl'
 import './style.css'
 
 /**
@@ -26,10 +28,18 @@ const scene = new THREE.Scene()
 /**
  * BOX
  */
-const material = new THREE.MeshStandardMaterial({ color: 'white' })
+const material = new THREE.RawShaderMaterial({
+  vertexShader,
+  fragmentShader,
+})
 const geometry = new THREE.PlaneGeometry(1, 1, 1, 10, 10, 10)
 const plane = new THREE.Mesh(geometry, material)
 scene.add(plane)
+
+plane.add(new THREE.AxesHelper(0.3))
+
+plane.position.y = 0.5
+plane.rotation.z = Math.PI / 4
 
 /**
  * render sizes
@@ -51,7 +61,13 @@ camera.lookAt(new THREE.Vector3(0, 2.5, 0))
  * Show the axes of coordinates system
  */
 const axesHelper = new THREE.AxesHelper(0.3)
-// scene.add(axesHelper)
+scene.add(axesHelper)
+
+/**
+ * Grid Helper - represents the ground
+ */
+const gridHelper = new THREE.GridHelper(10, 10)
+scene.add(gridHelper)
 
 /**
  * renderer

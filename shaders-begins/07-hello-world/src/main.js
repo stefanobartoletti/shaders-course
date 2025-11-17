@@ -10,6 +10,8 @@ import './style.css'
  */
 const configs = {
   example: 5,
+  showAxesHelper: false,
+  showGridHelper: false,
 }
 const pane = new Pane()
 pane
@@ -57,7 +59,34 @@ camera.lookAt(new THREE.Vector3(0, 2.5, 0))
  * Show the axes of coordinates system
  */
 const axesHelper = new THREE.AxesHelper(0.3)
-// scene.add(axesHelper)
+axesHelper.visible = false
+scene.add(axesHelper)
+
+/**
+ * Grid Helper - represents the ground
+ */
+const gridHelper = new THREE.GridHelper(10, 10)
+gridHelper.visible = false
+scene.add(gridHelper)
+
+/**
+ * Helper visibility control
+ */
+pane
+  .addBinding(configs, 'showAxesHelper', {
+    label: 'Show Axes',
+  })
+  .on('change', (ev) => {
+    axesHelper.visible = ev.value
+  })
+
+pane
+  .addBinding(configs, 'showGridHelper', {
+    label: 'Show Grid',
+  })
+  .on('change', (ev) => {
+    gridHelper.visible = ev.value
+  })
 
 /**
  * renderer
